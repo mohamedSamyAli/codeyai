@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/codeyai/build/static/css/main.a51ad7d4.css",
-    "main.js": "/codeyai/build/static/js/main.5b02bd0c.js",
-    "static/js/787.661e1da1.chunk.js": "/codeyai/build/static/js/787.661e1da1.chunk.js",
-    "static/media/addimg.svg": "/codeyai/build/static/media/addimg.253087dcd4a4ced941dc8a3a12d8afd4.svg",
-    "index.html": "/codeyai/build/index.html",
-    "static/media/class.svg": "/codeyai/build/static/media/class.95c3737bf1e18fe0cf0f9edd1062f847.svg",
-    "static/media/innerClass.svg": "/codeyai/build/static/media/innerClass.87f5a9000234a1885316e25cada487ae.svg",
-    "static/media/greenArrow.svg": "/codeyai/build/static/media/greenArrow.6835fdf0f0ebb5a78a9d192cf20a70dc.svg",
-    "static/media/redArrow.svg": "/codeyai/build/static/media/redArrow.9923aff9ecb5ece46ce006ea4d21958a.svg",
-    "static/media/three-dots.svg": "/codeyai/build/static/media/three-dots.c67cff182f5e8d09d48c51d7f7fddb94.svg",
-    "static/media/interfaceSvg.svg": "/codeyai/build/static/media/interfaceSvg.29c80822670ddc9f9170f4d6272bd373.svg",
-    "main.a51ad7d4.css.map": "/codeyai/build/static/css/main.a51ad7d4.css.map",
-    "main.5b02bd0c.js.map": "/codeyai/build/static/js/main.5b02bd0c.js.map",
-    "787.661e1da1.chunk.js.map": "/codeyai/build/static/js/787.661e1da1.chunk.js.map"
+    "main.css": "/codeyai/static/css/main.a51ad7d4.css",
+    "main.js": "/codeyai/static/js/main.3477a888.js",
+    "static/js/787.661e1da1.chunk.js": "/codeyai/static/js/787.661e1da1.chunk.js",
+    "static/media/addimg.svg": "/codeyai/static/media/addimg.253087dcd4a4ced941dc8a3a12d8afd4.svg",
+    "index.html": "/codeyai/index.html",
+    "static/media/class.svg": "/codeyai/static/media/class.95c3737bf1e18fe0cf0f9edd1062f847.svg",
+    "static/media/innerClass.svg": "/codeyai/static/media/innerClass.87f5a9000234a1885316e25cada487ae.svg",
+    "static/media/greenArrow.svg": "/codeyai/static/media/greenArrow.6835fdf0f0ebb5a78a9d192cf20a70dc.svg",
+    "static/media/redArrow.svg": "/codeyai/static/media/redArrow.9923aff9ecb5ece46ce006ea4d21958a.svg",
+    "static/media/three-dots.svg": "/codeyai/static/media/three-dots.c67cff182f5e8d09d48c51d7f7fddb94.svg",
+    "static/media/interfaceSvg.svg": "/codeyai/static/media/interfaceSvg.29c80822670ddc9f9170f4d6272bd373.svg",
+    "main.a51ad7d4.css.map": "/codeyai/static/css/main.a51ad7d4.css.map",
+    "main.3477a888.js.map": "/codeyai/static/js/main.3477a888.js.map",
+    "787.661e1da1.chunk.js.map": "/codeyai/static/js/787.661e1da1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a51ad7d4.css",
-    "static/js/main.5b02bd0c.js"
+    "static/js/main.3477a888.js"
   ]
 }
