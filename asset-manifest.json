@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.a51ad7d4.css",
-    "main.js": "/static/js/main.cc766ce2.js",
-    "static/js/787.661e1da1.chunk.js": "/static/js/787.661e1da1.chunk.js",
-    "static/media/addimg.svg": "/static/media/addimg.253087dcd4a4ced941dc8a3a12d8afd4.svg",
-    "index.html": "/index.html",
-    "static/media/class.svg": "/static/media/class.95c3737bf1e18fe0cf0f9edd1062f847.svg",
-    "static/media/innerClass.svg": "/static/media/innerClass.87f5a9000234a1885316e25cada487ae.svg",
-    "static/media/greenArrow.svg": "/static/media/greenArrow.6835fdf0f0ebb5a78a9d192cf20a70dc.svg",
-    "static/media/redArrow.svg": "/static/media/redArrow.9923aff9ecb5ece46ce006ea4d21958a.svg",
-    "static/media/three-dots.svg": "/static/media/three-dots.c67cff182f5e8d09d48c51d7f7fddb94.svg",
-    "static/media/interfaceSvg.svg": "/static/media/interfaceSvg.29c80822670ddc9f9170f4d6272bd373.svg",
-    "main.a51ad7d4.css.map": "/static/css/main.a51ad7d4.css.map",
-    "main.cc766ce2.js.map": "/static/js/main.cc766ce2.js.map",
-    "787.661e1da1.chunk.js.map": "/static/js/787.661e1da1.chunk.js.map"
+    "main.css": "/codeyai/build/static/css/main.a51ad7d4.css",
+    "main.js": "/codeyai/build/static/js/main.5b02bd0c.js",
+    "static/js/787.661e1da1.chunk.js": "/codeyai/build/static/js/787.661e1da1.chunk.js",
+    "static/media/addimg.svg": "/codeyai/build/static/media/addimg.253087dcd4a4ced941dc8a3a12d8afd4.svg",
+    "index.html": "/codeyai/build/index.html",
+    "static/media/class.svg": "/codeyai/build/static/media/class.95c3737bf1e18fe0cf0f9edd1062f847.svg",
+    "static/media/innerClass.svg": "/codeyai/build/static/media/innerClass.87f5a9000234a1885316e25cada487ae.svg",
+    "static/media/greenArrow.svg": "/codeyai/build/static/media/greenArrow.6835fdf0f0ebb5a78a9d192cf20a70dc.svg",
+    "static/media/redArrow.svg": "/codeyai/build/static/media/redArrow.9923aff9ecb5ece46ce006ea4d21958a.svg",
+    "static/media/three-dots.svg": "/codeyai/build/static/media/three-dots.c67cff182f5e8d09d48c51d7f7fddb94.svg",
+    "static/media/interfaceSvg.svg": "/codeyai/build/static/media/interfaceSvg.29c80822670ddc9f9170f4d6272bd373.svg",
+    "main.a51ad7d4.css.map": "/codeyai/build/static/css/main.a51ad7d4.css.map",
+    "main.5b02bd0c.js.map": "/codeyai/build/static/js/main.5b02bd0c.js.map",
+    "787.661e1da1.chunk.js.map": "/codeyai/build/static/js/787.661e1da1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a51ad7d4.css",
-    "static/js/main.cc766ce2.js"
+    "static/js/main.5b02bd0c.js"
   ]
 }
