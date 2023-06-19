@@ -2,42 +2,32 @@ import React, { useEffect, useState } from 'react'
 import type { MenuProps } from 'antd';
 import { Dropdown } from 'antd';
 
-let signs = {
-    1: "int",
-    2: "double",
-    3: "string",
 
-}
-
-let _signs = {
-    "int": 1,
-    "double": 2,
-    "string": 3,
-
-}
 
 export const TypeComponent = ({ data = [], id, onChange, _val = null }) => {
-    const [val, setval] = useState(1)
+    const [val, setval] = useState('int')
     const changeTxt = (txt) => {
         document.getElementById("prop_" + id).innerText = txt
         onChange(txt)
     }
+
     useEffect(() => {
         if (_val) {
-            setval(_signs[_val])
+            // setval(_signs[_val])
+            setval(_val)
         }
     }, [])
     const items: MenuProps['items'] = [
         {
-            key: 1,
+            key: 'int',
             label: (<div onClick={() => { changeTxt("int") }}>int</div>)
         },
         {
-            key: 2,
+            key: 'double',
             label: (<div onClick={() => { changeTxt("double") }}>double</div>)
         },
         {
-            key: 3,
+            key: 'string',
             label: (<div onClick={() => { changeTxt("string") }}>string</div>)
         },
         ...data.map(ele => ({
@@ -47,7 +37,13 @@ export const TypeComponent = ({ data = [], id, onChange, _val = null }) => {
     ];
     return (
         <Dropdown menu={{ items }}>
-            <div className='cursor-pointer focus-visible:outline-none min-w-[1rem]' contentEditable suppressContentEditableWarning id={"prop_" + id} >{signs[val]}</div>
+            <div
+                className='cursor-pointer focus-visible:outline-none min-w-[1rem]'
+                contentEditable
+                suppressContentEditableWarning id={"prop_" + id}
+                onInput={(e) => { onChange((e.target as HTMLElement).innerText) }}
+            >
+                {val}</div>
         </Dropdown>
     )
 }

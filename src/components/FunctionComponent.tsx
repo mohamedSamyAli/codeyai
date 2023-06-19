@@ -7,8 +7,8 @@ import { ScopeComponent } from './ScopeComponent';
 import classNames from 'classnames';
 
 const { TextArea } = Input;
-export const FunctionComponent = ({ onChange, id }) => {
-    const [value, setvalue] = useState({ funcName: 'funcName', parameters: '', description: '', funcScope: "public", returnType: "int" })
+export const FunctionComponent = ({ data = null, setSelectedFunc=null,onChange, id }) => {
+    const [value, setvalue] = useState({ funcName: 'funcName', parameters: [], description: '', funcScope: "public", returnType: "int" })
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isFocus, setIsFocus] = useState(false)
     const changeProperties = (id, name) => {
@@ -18,6 +18,42 @@ export const FunctionComponent = ({ onChange, id }) => {
         console.log("get")
         onChange(value)
     }, [value])
+    useEffect(() => {
+        if (data) {
+            console.log(data)
+            setvalue(data)
+            document.getElementById(id + 'funcName').innerText = data.funcName
+            let paramText = ''
+            console.log("->",data)
+            data?.parameters?.forEach((ele,i)=>{
+                paramText+=ele.paramName
+                paramText+=":"+ele.paramType
+                if(i<data.parameters.length-1){
+                    paramText+=","
+                }
+
+            })
+            document.getElementById(id + 'param').innerText = paramText
+        }
+    }, [])
+    useEffect(() => {
+        if (isFocus && setSelectedFunc) {
+
+            setSelectedFunc(e => {
+
+                let a = e.concat(id)
+                console.log(e, a)
+                return a
+            }
+            )
+        }
+        if (!isFocus && setSelectedFunc) {
+            setTimeout(() => {
+
+                setSelectedFunc(e => e.filter(ele => ele != id))
+            }, 500);
+        }
+    }, [isFocus])
     const onParamsChange = (e) => {
         let text = (e.target as HTMLElement).innerText
         let params = text.split(",")
@@ -36,8 +72,9 @@ export const FunctionComponent = ({ onChange, id }) => {
 
                 <div onFocus={(e) => { setIsFocus(true) }} onBlur={(e) => setIsFocus(false)}
                     className='functiondata w-max items-center flex min-w-[1rem] nodrag cursor-text p-[1px] focus-visible:outline-none'>
-                    <ScopeComponent onChange={(val) => changeProperties("funcScope", val)} />
+                    <ScopeComponent onChange={(val) => changeProperties("funcScope", val)} _val={data?.funcScope} />
                     <div
+                        id={id + 'funcName'}
                         onInput={(e) => {
                             changeProperties("funcName", (e.target as HTMLElement).innerText)
                         }}
@@ -47,12 +84,13 @@ export const FunctionComponent = ({ onChange, id }) => {
                     </div>
                     (
                     <div
+                        id={id + 'param'}
                         onInput={(e) => {
                             onParamsChange(e)
                         }}
                         suppressContentEditableWarning={true}
                         contentEditable={true} className='cursor-text w-fit min-w-[1rem] nodrag focus-visible:outline-none' >
-                        p1
+
                     </div>
                     <div>
 
@@ -64,7 +102,7 @@ export const FunctionComponent = ({ onChange, id }) => {
                     <div>
                         {"}"}:
                     </div>
-                    <TypeComponent onChange={(val) => changeProperties("returnType", val)} id={id} data={["void"]} />
+                    <TypeComponent onChange={(val) => changeProperties("returnType", val)} _val={data?.returnType} id={id} data={["void"]} />
                 </div>
             </div>
             <Modal

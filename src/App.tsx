@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, ReactFlowProvider, Background, updateEdge, MarkerType, ConnectionLineType, Connection } from 'reactflow';
 import 'reactflow/dist/style.css';
-
-import ClassDigram from './components/classes/ClassDigram';
-import InnerClassDigram from './components/classes/InnerClassDigram';
-import InterfaceDigram from './components/classes/InterfaceDigram';
-
+import ClassDigram from './components/classes/classDigram/ClassDigram';
+import InnerClassDigram from './components/classes/innerClassDigram/InnerClassDigram';
+import InterfaceDigram from './components/classes/interfaceDigram/InterfaceDigram';
 import './index.css';
 import { SideBar } from './components/SideBar';
-// import { store } from './store';
 import { toast } from 'react-toastify';
 import uniqId from "uniqid"
 import { DigramTypes } from './components/types';
 import { download } from './components/utils';
 import { EdgeWithDescription } from './components/customEdges/EdgeWithDescription';
-import { __edges, __nodes } from './data';
 
 const initBgColor = '#1A192B';
 
@@ -78,13 +74,7 @@ const CustomNodeFlow = () => {
       [reactFlowInstance, nodes, reactFlowWrapper, setNodes]
     );
 
-  useEffect(() => {
-    __nodes.forEach(ele=>{
-      store.current[ele.customData.id]=ele.customData.id
-    })
-    setNodes(__nodes.map(ele => ({ ...ele, data: {customData:ele.customData, reactFlowWrapper, setNodes, setEdges, reactFlowInstance, nodes, store } })))
-    setEdges(__edges)
-  }, [])
+
   const onConnect = useCallback(
     (params: Connection) => {
 
@@ -105,11 +95,14 @@ const CustomNodeFlow = () => {
     let digramName = document.getElementById("d_name").innerText
     let _store = JSON.parse(JSON.stringify(store.current))
     let nodes_data = nodes.map((e: any) => {
+      console.log("customDAta", _store[e.id])
       e.customData = _store[e.id]
       return e
     })
     edges.forEach(ele => {
+      console.log("-->", ele.targetHandle.split('_')[0])
       if (ele.targetHandle.split('_')[0] === "class") {
+        console.log("tt", _store[ele.target])
         if (!_store[ele.target].parentClass)
           _store[ele.target].parentClass = []
 
@@ -118,33 +111,43 @@ const CustomNodeFlow = () => {
           componentType: _store[ele.source].componentType,
           componentScope: _store[ele.source].componentScope
         })
-      } else {
-        let currentfunction = _store[ele.target].functions.filter(e => e.id == ele.targetHandle.split("_")[1])[0]
+      } else if (ele.targetHandle.split('_')[0] === "func") {
+        debugger
+        let currentfunction = _store[ele.target]?.functions?.filter(e => e.id == ele.targetHandle.split("_")[2])[0]
         console.log(currentfunction, _store, ele)
         currentfunction?.functionsCall?.push({
           className: _store[ele.source].componentName,
           id: ele.sourceHandle.split("_")[1],
-          name: _store[ele.source].functions.filter(e => e.id == ele.sourceHandle.split("_")[1])[0].funcName
+          functionName: _store[ele.source].functions.filter(e => e.id == ele.sourceHandle.split("_")[2])[0].funcName,
+          callDescription: ""
         })
-      }
-      if (ele.targetHandle === "innerclass") {
-        _store[ele.source].innerClasses?.push(store.current[ele.target])
+      } else if (ele.targetHandle === "innerclass") {
+        debugger
+        _store[ele.source].innerClasses?.push(_store[ele.target])
       }
     })
+
     let components = []
     Object.getOwnPropertyNames(_store).forEach(n => {
-      components.push(_store[n])
+      if (_store[n].componentType !== DigramTypes.inerClass) {
+        components.push(_store[n])
+      }
     })
     download("digram.json", JSON.stringify({
       [digramName]: {
         components
+      },
+      //@ts-ignore
+      nodes: nodes.map(({ customData, dragging, height, id, position, positionAbsolute, selected, type, width }) => {
+        return { customData, dragging, height, id, position, positionAbsolute, selected, type, width }
+      }),
+      edges: edges
+    }))
+    download("data.json", JSON.stringify({
+      [digramName]: {
+        components
       }
     }))
-    //@ts-ignore
-    download("nodes.json", JSON.stringify(nodes.map(({ customData, dragging, height, id, position, positionAbsolute, selected, type, width }) => {
-      return { customData, dragging, height, id, position, positionAbsolute, selected, type, width }
-    })))
-    download("edges.json", JSON.stringify(edges))
     console.log("store", {
       [digramName]: {
         components
@@ -171,13 +174,49 @@ const CustomNodeFlow = () => {
   const handelNodeChange = (params) => {
     onNodesChange(params)
   }
-
+  const onReadFile = (e) => {
+    store.current = {}
+    var fr = new FileReader();
+    fr.onload = () => {
+      let digramData = JSON.parse(fr.result as string)
+      // digramData.nodes.forEach(ele => {
+      //   store.current[ele.customData.id] = ele.customData.id
+      // })
+      console.log('current', store.current)
+      setNodes(digramData.nodes.map(ele => ({ ...ele, data: { customData: ele.customData, reactFlowWrapper, setNodes, setEdges, reactFlowInstance, nodes, store } })))
+      // setNodes(digramData.nodes.map(ele => ({ ...ele, data: {  reactFlowWrapper, setNodes, setEdges, reactFlowInstance, nodes, store } })))
+      setEdges(digramData.edges)
+      document.getElementById('d_name').innerText = Object.getOwnPropertyNames(digramData)[0]
+      console.log(fr.result)
+    }
+    fr.readAsText(e.target.files[0]);
+  }
+  useEffect(() => {
+    window.addEventListener('error', e => {
+      if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
+        const resizeObserverErrDiv = document.getElementById(
+          'webpack-dev-server-client-overlay-div'
+        )
+        const resizeObserverErr = document.getElementById(
+          'webpack-dev-server-client-overlay'
+        )
+        if (resizeObserverErr) {
+          resizeObserverErr.setAttribute('style', 'display: none');
+        }
+        if (resizeObserverErrDiv) {
+          resizeObserverErrDiv.setAttribute('style', 'display: none');
+        }
+      }
+    })
+  }, [])
   return (
     <div style={{ display: "flex" }}>
       <ReactFlowProvider>
         <div style={{ width: '20vw', height: '100vh', backgroundColor: "white", border: "2px solid grey" }}>
           <SideBar />
           <button onClick={getData}>get data</button>
+          <input type="file" name="inputfile" id="inputfile" onChange={onReadFile} />
+
         </div>
         <div className='w-[80vw] h-[100vh] relative ' style={{ width: '80vw', height: '100vh' }} ref={reactFlowWrapper}>
           <div id="d_name" className='absolute z-10 focus-visible:outline-none top-[-2px] left-[5px] cursor-text  font-bold text-[35px]' contentEditable={true} suppressContentEditableWarning >
@@ -205,13 +244,13 @@ const CustomNodeFlow = () => {
             fitView
             attributionPosition="bottom-left"
           >
-            <MiniMap
+            {/* <MiniMap
 
               nodeColor={(n) => {
                 if (n.type === 'selectorNode') return bgColor;
                 return '#fff';
               }}
-            />
+            /> */}
             <Controls />
             <Background color="#aaa" gap={16} />
 
