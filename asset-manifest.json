@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/codeyai/static/css/main.f2530ab0.css",
-    "main.js": "/codeyai/static/js/main.f5611efc.js",
+    "main.js": "/codeyai/static/js/main.fe9c97ff.js",
     "static/js/787.661e1da1.chunk.js": "/codeyai/static/js/787.661e1da1.chunk.js",
     "static/media/addimg.svg": "/codeyai/static/media/addimg.253087dcd4a4ced941dc8a3a12d8afd4.svg",
     "index.html": "/codeyai/index.html",
@@ -12,11 +12,11 @@
     "static/media/three-dots.svg": "/codeyai/static/media/three-dots.c67cff182f5e8d09d48c51d7f7fddb94.svg",
     "static/media/interfaceSvg.svg": "/codeyai/static/media/interfaceSvg.29c80822670ddc9f9170f4d6272bd373.svg",
     "main.f2530ab0.css.map": "/codeyai/static/css/main.f2530ab0.css.map",
-    "main.f5611efc.js.map": "/codeyai/static/js/main.f5611efc.js.map",
+    "main.fe9c97ff.js.map": "/codeyai/static/js/main.fe9c97ff.js.map",
     "787.661e1da1.chunk.js.map": "/codeyai/static/js/787.661e1da1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f2530ab0.css",
-    "static/js/main.f5611efc.js"
+    "static/js/main.fe9c97ff.js"
   ]
 }
