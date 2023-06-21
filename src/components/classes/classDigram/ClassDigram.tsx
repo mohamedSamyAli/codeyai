@@ -28,12 +28,13 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
   }
 
   useEffect(() => {
-    if (!store.current[props.id]) {
-      store.current[props.id] = {}
-      store.current[props.id].componentType = DigramTypes.class
-      store.current[props.id].componentScope = "public"
-      store.current[props.id].innerClasses = []
-    }
+    // if (!store.current[props.id]) {
+    //   store.current[props.id] = {}
+    //   store.current[props.id].componentType = DigramTypes.class
+    //   store.current[props.id].componentScope = "public"
+    //   store.current[props.id].innerClasses = []
+    // }
+    initComponentInTheStore()
     store.current[props.id].componentName = title
 
   }, [title, props.id])
@@ -74,10 +75,19 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     store.current[props.id].functions = temp
 
   }
-  useEffect(() => {
+  const initComponentInTheStore  = ()=>{
     if (!store.current[props.id]) {
       store.current[props.id] = {}
+      store.current[props.id].componentType = DigramTypes.class
+      store.current[props.id].componentScope = "public"
+      store.current[props.id].innerClasses = []
     }
+  }
+  useEffect(() => {
+    // if (!store.current[props.id]) {
+    //   store.current[props.id] = {}
+    // }
+    initComponentInTheStore()
     if (customData) {
       document.getElementById(props.id + "title").innerText = customData.componentName
       store.current[props.id].componentName = customData.componentName
