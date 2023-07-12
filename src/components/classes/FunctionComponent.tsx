@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import threeDots from '../assets/three-dots.svg'
+import threeDots from '../../assets/three-dots.svg'
 import { Modal } from 'antd';
 import { Input, Button } from 'antd';
 import { TypeComponent } from './TypeComponent';

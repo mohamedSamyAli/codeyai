@@ -2,12 +2,12 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Handle, NodeResizeControl, Position, addEdge } from 'reactflow';
 import '../../../App.css'
 import uniqId from "uniqid"
-import { FunctionComponent } from '../../FunctionComponent';
+import { FunctionComponent } from '../FunctionComponent';
 import AddImage from '../../../assets/addimg.svg'
-import { DigramTypes } from '../../types';
-import { PropertyComponent } from '../../PropertyComponent';
+import { DigramTypes } from '../types';
+import { PropertyComponent } from '../PropertyComponent';
 import Del from '../../../assets/del.png'
-import { ResizeIcon } from '../../CustomResizer';
+import { ResizeIcon } from '../CustomResizer';
 import { FunctionHandels } from './FunctionHandels';
 import { ClassHandels } from './ClassHandels';
 
@@ -81,6 +81,8 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
       store.current[props.id].componentType = DigramTypes.class
       store.current[props.id].componentScope = "public"
       store.current[props.id].innerClasses = []
+      store.current[props.id].classVariables = []
+      store.current[props.id].functions = []
     }
   }
   useEffect(() => {

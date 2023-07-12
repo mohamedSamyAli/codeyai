@@ -2,11 +2,11 @@ import React, { memo, useEffect, useState } from 'react';
 import { Handle, NodeResizeControl, Position } from 'reactflow';
 import '../../../App.css'
 import uniqId from "uniqid"
-import { FunctionComponent } from '../../FunctionComponent';
+import { FunctionComponent } from '../FunctionComponent';
 import AddImage from '../../../assets/addimg.svg'
-import { DigramTypes } from '../../types';
+import { DigramTypes } from '../types';
 
-import { ResizeIcon } from '../../CustomResizer';
+import { ResizeIcon } from '../CustomResizer';
 import { FunctionHandels } from './FunctionHandels';
 import { ClassHandels } from './ClassHandels';
 import Del from '../../../assets/del.png'
@@ -25,16 +25,26 @@ export default memo<any>(({ data: { store, customData }, isConnectable, ...props
         }, 10)
     }
     useEffect(() => {
-        if (!store.current[props.id]) {
-            store.current[props.id] = {}
-            store.current[props.id].componentType = DigramTypes.interface
-            store.current[props.id].innerClasses = []
+        // if (!store.current[props.id]) {
+        //     store.current[props.id] = {}
+        //     store.current[props.id].componentType = DigramTypes.interface
+        //     store.current[props.id].innerClasses = []
+        //     store.current[props.id].componentScope = "public"
 
-        }
+        // }
+        initComponentInTheStore()
         store.current[props.id].componentName = title
-        store.current[props.id].componentScope = "public"
     }, [title, props.id])
-
+    const initComponentInTheStore  = ()=>{
+        if (!store.current[props.id]) {
+          store.current[props.id] = {}
+          store.current[props.id].componentType = DigramTypes.interface
+          store.current[props.id].componentScope = "public"
+        //   store.current[props.id].innerClasses = []
+        //   store.current[props.id].classVariables = []
+          store.current[props.id].functions = []
+        }
+      }
     const changefunction = (id, val) => {
         let func = functions.filter(ele => ele.id === id)[0]
         func.funcName = val.funcName
@@ -48,9 +58,11 @@ export default memo<any>(({ data: { store, customData }, isConnectable, ...props
     }
     
     useEffect(() => {
-        if (!store.current[props.id]) {
-          store.current[props.id] = {}
-        }
+        // if (!store.current[props.id]) {
+        //   store.current[props.id] = {}
+        // }
+        initComponentInTheStore()
+
         if (customData) {
           document.getElementById(props.id + "title").innerText = customData.componentName
           store.current[props.id].componentName = customData.componentName

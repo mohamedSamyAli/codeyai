@@ -1,7 +1,7 @@
 import React from 'react';
-import ClassSvg from '../assets/class.svg'
-import InnerClassSvg from '../assets/innerClass.svg'
-import InterfaceSvg from '../assets/interfaceSvg.svg'
+import ClassSvg from '../../assets/class.svg'
+import InnerClassSvg from '../../assets/innerClass.svg'
+import InterfaceSvg from '../../assets/interfaceSvg.svg'
 import { Tooltip } from 'antd';
 export const SideBar = () => {
 
