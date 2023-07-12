@@ -12,6 +12,12 @@ import { DigramTypes } from './components/types';
 import { download } from './components/utils';
 import { EdgeWithDescription } from './components/customEdges/EdgeWithDescription';
 
+
+import  Headers from './components/Layout/Headers';
+import  Footer from './components/Layout/Footer';
+import Home from './pages/Home';
+
+
 const initBgColor = '#1A192B';
 
 const nodeTypes = {
@@ -210,7 +216,12 @@ const CustomNodeFlow = () => {
     })
   }, [])
   return (
-    <div style={{ display: "flex" }}>
+    <div>
+      <Headers />
+      <Home />
+      <Footer />
+      
+      {/* <div style={{ display: "flex" }}>
       <ReactFlowProvider>
         <div style={{ width: '20vw', height: '100vh', backgroundColor: "white", border: "2px solid grey" }}>
           <SideBar />
@@ -250,13 +261,14 @@ const CustomNodeFlow = () => {
                 if (n.type === 'selectorNode') return bgColor;
                 return '#fff';
               }}
-            /> */}
+            /> *}
             <Controls />
             <Background color="#aaa" gap={16} />
 
           </ReactFlow>
         </div>
       </ReactFlowProvider>
+    </div> */}
     </div>
   );
 };
