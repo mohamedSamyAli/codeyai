@@ -10,6 +10,7 @@ import Del from '../../../assets/del.png'
 import { ResizeIcon } from '../CustomResizer';
 import { FunctionHandels } from './FunctionHandels';
 import { ClassHandels } from './ClassHandels';
+import classNames from 'classnames';
 
 const getId = () => `innernode_${uniqId()}`;
 
@@ -26,7 +27,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
       document.getElementById(id)?.focus()
     }, 10)
   }
-
+console.log("props--->",props)
   useEffect(() => {
     // if (!store.current[props.id]) {
     //   store.current[props.id] = {}
@@ -154,7 +155,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
   return (
     <>
       <div onDrop={onDrop}>
-        <div className='classdigram-container border-red'>
+        <div className={classNames('classdigram-container border-red',{shaded:props.selected})}>
           <ClassHandels isConnectable={isConnectable} />
           <div className='title flex relative p-[2px]'>
 
