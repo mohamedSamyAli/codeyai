@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sofia&display=swap");
+
 @layer components {
   .container {
     @apply w-[90%] px-[30px] mx-auto;
@@ -10,7 +13,7 @@
     @apply flex justify-center items-center;
   }
   .btn {
-    @apply bg-gradient-to-b bg-[#3F67AD] hover:from-blue-500 hover:to-[#FF8F94] transition-all duration-200 text-white rounded-[12px] px-[28px] py-[15px] font-medium text-lg leading-[26px] not-italic;
+    @apply bg-gradient-to-b bg-[#3F67AD] hover:from-blue-500 hover:to-[#FF8F94] transition-all duration-200 text-white rounded-[12px] px-[15px] py-[25px]  sm:px-[28px] sm:py-[15px] font-medium text-[14px] sm:text-lg leading-[26px] not-italic;
   }
 }
 /* [#3F67AD]  */

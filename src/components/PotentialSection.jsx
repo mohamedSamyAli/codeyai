@@ -30,10 +30,10 @@ function PotentialSection() {
 
   return (
     <section>
-      <h1 className="font-bold text-[#22222A] container mt-12 sm:mt-16 mb-8 sm:mb-12">
+      <h1 className="font-bold text-[28px] sm:text-[40px] text-[#22222A] container mt-12 sm:mt-16 mb-8 sm:mb-12">
         Unleash Your Potential
       </h1>
-      <div className="container">
+      <div className="container mb-14 sm:mb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[100px] max-w-full">
           {items.map((item) => {
             return (

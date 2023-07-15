@@ -3,6 +3,10 @@ module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        'Russo': ['Russo One', 'sans-serif'],
+        'Sofia': ['Sofia', 'sans-serif'],
+      },
       screens: {
         sm: "576px",
         md: "768px",

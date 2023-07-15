@@ -1,10 +1,15 @@
 import Button from "./UI/Button";
+import "./Landing.css";
+import leftImg from "../assets/Left.svg";
+import rightImg from "../assets/Right.svg";
+import webTitle from "../assets/website-title.svg";
+import VideoLogo from "../assets/VideoLogo.png";
 
 function Landing() {
   return (
     <section>
       <div className="container">
-        <div className="element-center flex-col pt-[50px] px-[30px] mb-[30px]">
+        <div className="container pt-[50px] px-[30px] mb-[30px]">
           <h1 className="pb-[24px] px-[25px] font-medium text-[24px] md:text-[28px] text-center text-[#22222A]">
             Your{" "}
             <span className="text-4xl from-[#3F67AD] via-[#7084B3] to-[#FF8F94] bg-gradient-to-b bg-clip-text text-transparent">
@@ -59,7 +64,7 @@ function Landing() {
           <span className="text-[#7B7F95] font-normal text-sm text-center">
             Or
           </span>
-          <Button className="btn element-center gap-[8px]">
+          <Button className="btn element-center gap-[8px] px-[30px] sm:px-[28px]">
             <span>Sign up with Email</span>
             <span className="element-center">
               <svg
@@ -92,8 +97,26 @@ function Landing() {
           </Button>
         </div>
       </div>
+      <div className="relative bottom-[-120px] mx-auto mt-[-120px] mb-[50px] text-center w-[343px] sm:w-[961px] max-w-full h-[593px] shrink-0 rounded-[10px] border border-[#3F67AD] bg-[#F4F5F7] ">
+        <div className="mainSec">
+          <div className="nav">
+            <div className="left">
+              <img src={leftImg} alt="leftImg" />
+            </div>
+            <div className="centerDiv">
+              <img src={webTitle} alt="webTitle" />
+            </div>
+            <div className="right">
+              <img src={rightImg} alt="rightImg" />
+            </div>
+          </div>
+          <div className="video">
+            <img src={VideoLogo} alt="VideoLogo" />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
-
+//w-[325px] sm:w-[941px] h-[52px] shrink-0 bg-white shadow-[0_1px_0_0_#3F67AD] mt-[10px] mx-auto relative
 export default Landing;
