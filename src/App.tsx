@@ -16,6 +16,7 @@ import { EdgeWithDescription } from './components/customEdges/EdgeWithDescriptio
 import  Headers from './components/Layout/Headers';
 import  Footer from './components/Layout/Footer';
 import Home from './pages/Home';
+import Login from './pages/Login';
 
 
 const initBgColor = '#1A192B';
@@ -218,6 +219,7 @@ const CustomNodeFlow = () => {
   return (
     <div>
       <Headers />
+      <Login />
       <Home />
       <Footer />
       
