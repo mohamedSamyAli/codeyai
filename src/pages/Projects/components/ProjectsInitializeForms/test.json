@@ -1,0 +1,31 @@
+{
+"type": "maven-project",
+"language": "java",
+//"BootVersion": "2.7.13",
+"groupId": "com.codeyai",
+"artifactId": "xxxx",
+//"name": "zzzs",
+"description": "A new Spring Boot project",
+"packageName": "xxx.xx.xx",
+"packaging": "jar",
+"javaVersion": "20",
+"dependencies": [
+  "dynatrace",
+  "actuator",
+  "data-redis-reactive",
+  "camel",
+  "cloud-contract-stub-runner",
+  "validation",
+  "azure-support",
+  "cloud-starter-zookeeper-config",
+  "cache",
+  "spring-shell",
+  "zipkin",
+  "data-rest-explorer",
+  "codecentric-spring-boot-admin-client",
+  "azure-keyvault",
+  "data-cassandra",
+  "cloud-starter-consul-discovery",
+  "kafka"
+]
+}

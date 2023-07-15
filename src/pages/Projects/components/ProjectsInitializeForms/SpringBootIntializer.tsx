@@ -32,76 +32,82 @@ export const SpringBootIntializer = ({ data, onSuccess, onBack }: Props) => {
                 onFinish={onSuccess}
                 initialValues={data}
             > */}
-                <Item name="project" label="Project">
+                <Item name="type" label="Project">
                     <Radio.Group value="Maven">
                         {/* <Radio value="a">Gradel - Groovy</Radio>
                         <Radio value="b">Gradel - Kotlin</Radio> */}
-                        <Radio value="Maven" checked>Maven</Radio>
+                        <Radio value="maven-project" checked>Maven</Radio>
                     </Radio.Group>
                 </Item>
-                <Item name="Language" label="Language">
+                <Item name="language" label="Language">
                     <Radio.Group>
-                        <Radio value="Java">Java</Radio>
+                        <Radio value="java">Java</Radio>
                         {/* <Radio value="b">Kotlin</Radio>
                         <Radio value="c">Grovy</Radio> */}
                     </Radio.Group>
                 </Item>
-                <Item  name="version" label="Spring Boot">
+                <Item  name="BootVersion" label="Spring Boot">
                     <Radio.Group>
-                        <Radio value="1">3.2.0(SNAPSHOT)</Radio>
-                        <Radio value="2">3.1.2(SNAPSHOT)</Radio>
-                        <Radio value="3">3.1.1</Radio>
-                        <Radio value="4">3.0.9(SNAPSHOT)</Radio>
-                        <Radio value="5">3.0.8</Radio>
-                        <Radio value="6">2.7.14(SNAPSHOT)</Radio>
-                        <Radio value="7">2.7.13</Radio>
+                        <Radio value="3.2.0">3.2.0(SNAPSHOT)</Radio>
+                        <Radio value="3.1.2">3.1.2(SNAPSHOT)</Radio>
+                        <Radio value="3.1.1">3.1.1</Radio>
+                        <Radio value="3.0.9">3.0.9(SNAPSHOT)</Radio>
+                        <Radio value="3.0.8">3.0.8</Radio>
+                        <Radio value="2.7.14">2.7.14(SNAPSHOT)</Radio>
+                        <Radio value="2.7.13">2.7.13</Radio>
                     </Radio.Group>
                 </Item>
                 <div> project Metadata</div>
                 <Item
-                    name="Group"
+                    name="groupId"
                     label="Group"
                 >
                     <Input />
                 </Item>
                 <Item
-                    name="Artifact"
+                    name="artifactId"
                     label="Artifact"
                 >
                     <Input />
                 </Item>
                 <Item
-                    name="Description"
+                    name="name"
+                    label="Name"
+                >
+                    <Input />
+                </Item>
+                <Item
+                    name="description"
                     label="Description"
                 >
                     <Input />
                 </Item>
                 <Item
-                    name="PackageName"
+                    name="packageName"
                     label="Package name"
                 >
                     <Input />
                 </Item>
-                <Item name="Packaging" label="Packaging">
+                <Item name="packaging" label="Packaging">
                     <Radio.Group>
-                        <Radio value="1">Jar</Radio>
-                        <Radio value="2">War</Radio>
+                        <Radio value="jar">Jar</Radio>
+                        <Radio value="war">War</Radio>
                     </Radio.Group>
                 </Item>
-                <Item name="Java" label="Java">
+                <Item name="javaVersion" label="Java">
                     <Radio.Group>
-                        <Radio value="1">20</Radio>
-                        <Radio value="2">17</Radio>
-                        <Radio value="3">11</Radio>
-                        <Radio value="4">8</Radio>
+                        <Radio value="20">20</Radio>
+                        <Radio value="17">17</Radio>
+                        <Radio value="11">11</Radio>
+                        <Radio value="8">8</Radio>
                     </Radio.Group>
                 </Item>
                 <Item
                     label="type"
-                    name="dependancies"
+                    name="dependencies"
                 >
                     <Select
-                        placeholder="select project type"
+                        placeholder="select project dependencies"
                         style={{ width: "100%" }}
                         mode="multiple"
                         options={dependancesOptions}

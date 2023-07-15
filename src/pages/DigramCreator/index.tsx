@@ -16,6 +16,7 @@ import { download } from '../../components/classes/utils';
 import { SideBar } from '../../components/classes/SideBar';
 import { useParams } from 'react-router-dom';
 import { addOrUpdateProject, getProject } from '../Projects/fakeApi';
+import axios from 'axios'
 const initBgColor = '#1A192B';
 
 const nodeTypes = {
@@ -35,7 +36,7 @@ const CustomNodeFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [bgColor, setBgColor] = useState(initBgColor);
   const edgeUpdateSuccessful = useRef(true);
-  const onDeleteRef = useRef(()=>{});
+  const onDeleteRef = useRef(() => { });
   const selectedItems = useRef<OnSelectionChangeParams>({ edges: [], nodes: [] });
   const store = useRef({});
 
@@ -151,15 +152,72 @@ const CustomNodeFlow = () => {
       }),
       edges: edges
     })
-    download("digram.json", downloaded_digram)
+    // download("digram.json", downloaded_digram)
     let project = getProject(projectId)
     project.digram = downloaded_digram
     addOrUpdateProject(project, projectId)
-    download("data.json", JSON.stringify({
-      [digramName]: {
-        components
-      }
-    }))
+    // download("data.json", JSON.stringify({
+    //   [digramName]: {
+    //     components
+    //   }
+    // }))
+    let ProjectBody = {...project}
+    delete ProjectBody.digram
+    delete ProjectBody.Project_Type
+    delete ProjectBody.id
+    axios.post("http://codeyai.com/test",{}).then(e => {
+      console.log(e)
+    })
+
+    axios.post(process.env.REACT_APP_META_DATA,
+      ProjectBody
+//       {
+//   "type": "maven-project",
+//   "language": "java",
+//   "BootVersion": "2.7.13",
+//   "groupId": "com.codeyai",
+//   "artifactId": "xxxx",
+//   "name": "zzzs",
+//   "description": "A new Spring Boot project",
+//   "packageName": "xxx.xx.xx",
+//   "packaging": "jar",
+//   "javaVersion": "20",
+//   "dependencies": [
+//     "dynatrace",
+//     "actuator",
+//     "data-redis-reactive",
+//     "camel",
+//     "cloud-contract-stub-runner",
+//     "validation",
+//     "azure-support",
+//     "cloud-starter-zookeeper-config",
+//     "cache",
+//     "spring-shell",
+//     "zipkin",
+//     "data-rest-explorer",
+//     "codecentric-spring-boot-admin-client",
+//     "azure-keyvault",
+//     "data-cassandra",
+//     "cloud-starter-consul-discovery",
+//     "kafka"
+//   ]
+// }
+      
+      ).then(e => {
+
+      axios.post(process.env.REACT_APP_JSON_LOADER,
+        {
+          [digramName]: {
+            components
+          }
+        }
+      ).then(e => {
+        console.log(e)
+      }).catch((e) => {
+        console.log(e)
+      })
+    })
+
     console.log("store", {
       [digramName]: {
         components
@@ -244,37 +302,37 @@ const CustomNodeFlow = () => {
       }
     })
   }, [])
-  
-  onDeleteRef.current = ()=>{
+
+  onDeleteRef.current = () => {
     let _nodes = []
-    let _edges=[]
+    let _edges = []
     let isNodeParent = false
-    nodes.forEach(ele=>{
-      if(ele.parentNode==selectedItems.current.nodes[0]?.id){
-        isNodeParent=true
-      }
-    })
-    if(isNodeParent){
-      toast.error("can't delete node that contain inner class please delete inner class first")
-    }else{
-
     nodes.forEach(ele => {
-      console.log("res=>",selectedItems.current.nodes.find(n=>n.id===ele.id))
-      if (!selectedItems.current.nodes.find(n=>n.id===ele.id)) {
-        _nodes.push(ele)
+      if (ele.parentNode == selectedItems.current.nodes[0]?.id) {
+        isNodeParent = true
       }
     })
+    if (isNodeParent) {
+      toast.error("can't delete node that contain inner class please delete inner class first")
+    } else {
 
-    edges.forEach(ele => {
-      if (!selectedItems.current.edges.find(n=>n.sourceNode.id===ele.id|| n.targetNode.id===ele.id)) {
-        _edges.push(ele)
-      }
-    })
-    setNodes(_nodes)
-    setEdges(_edges)
-    console.log("store->",store)
-    delete store.current["parentNode==selectedItems.current.nodes[0]?.id"]
-  }
+      nodes.forEach(ele => {
+        console.log("res=>", selectedItems.current.nodes.find(n => n.id === ele.id))
+        if (!selectedItems.current.nodes.find(n => n.id === ele.id)) {
+          _nodes.push(ele)
+        }
+      })
+
+      edges.forEach(ele => {
+        if (!selectedItems.current.edges.find(n => n.sourceNode.id === ele.id || n.targetNode.id === ele.id)) {
+          _edges.push(ele)
+        }
+      })
+      setNodes(_nodes)
+      setEdges(_edges)
+      console.log("store->", store)
+      delete store.current["parentNode==selectedItems.current.nodes[0]?.id"]
+    }
 
   }
   const onSelectionChange = (e: OnSelectionChangeParams) => {

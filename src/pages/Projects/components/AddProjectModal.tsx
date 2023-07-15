@@ -60,7 +60,7 @@ export const AddProject_Modal = ({ isOpen, setIsOpen }) => {
                 <Form
                     form={form}
                     onFinish={handleSubmit}
-                    initialValues={{ project: "Maven", Language: "Java" }}
+                    initialValues={{ project: "maven-project", Language: "Java" }}
                 >
                     <Item
                         label="type"

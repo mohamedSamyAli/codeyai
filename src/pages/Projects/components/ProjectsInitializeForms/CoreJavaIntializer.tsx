@@ -26,16 +26,16 @@ export const CoreJavaIntializer = () => {
                 onFinish={onSuccess}
                 initialValues={data}
             > */}
-                <Item name="project" label="Project">
-                    <Radio.Group value="Maven">
+                <Item name="type" label="Project">
+                    <Radio.Group value="maven-project">
                         {/* <Radio value="a">Gradel - Groovy</Radio>
                         <Radio value="b">Gradel - Kotlin</Radio> */}
-                        <Radio value="Maven" checked>Maven</Radio>
+                        <Radio value="maven-project" checked>Maven</Radio>
                     </Radio.Group>
                 </Item>
-                <Item name="Language" label="Language">
+                <Item name="language" label="Language">
                     <Radio.Group>
-                        <Radio value="Java">Java</Radio>
+                        <Radio value="java">Java</Radio>
                         {/* <Radio value="b">Kotlin</Radio>
                         <Radio value="c">Grovy</Radio> */}
                     </Radio.Group>
@@ -53,49 +53,56 @@ export const CoreJavaIntializer = () => {
                 </Item> */}
                 <div> project Metadata</div>
                 <Item
-                    name="Group"
+                    name="groupId"
                     label="Group"
                 >
                     <Input />
                 </Item>
                 <Item
-                    name="Artifact"
+                    name="artifactId"
                     label="Artifact"
                 >
                     <Input />
                 </Item>
                 <Item
-                    name="Description"
+                    name="name"
+                    label="Name"
+                >
+                    <Input />
+                </Item>
+                <Item
+                    name="description"
                     label="Description"
                 >
                     <Input />
                 </Item>
+
                 <Item
-                    name="PackageName"
+                    name="packageName"
                     label="Package name"
                 >
                     <Input />
                 </Item>
-                <Item name="Packaging" label="Packaging">
+                <Item name="packaging" label="Packaging">
                     <Radio.Group>
-                        <Radio value="1">Jar</Radio>
-                        <Radio value="2">War</Radio>
+                        <Radio value="jar">Jar</Radio>
+                        <Radio value="war">War</Radio>
                     </Radio.Group>
                 </Item>
-                <Item name="Java" label="Java">
+                <Item name="javaVersion" label="Java">
                     <Radio.Group>
-                        <Radio value="1">20</Radio>
-                        <Radio value="2">17</Radio>
-                        <Radio value="3">11</Radio>
-                        <Radio value="4">8</Radio>
+                        <Radio value="20">20</Radio>
+                        <Radio value="17">17</Radio>
+                        <Radio value="11">11</Radio>
+                        <Radio value="8">8</Radio>
                     </Radio.Group>
                 </Item>
                 <Item
-                    label="type"
+                    label="dependencies"
                     name="dependancies"
                 >
                     <Select
-                        placeholder="select project type"
+                        placeholder="select project dependencies"
                         style={{ width: "100%" }}
                         mode="multiple"
                         options={dependancesOptions}
