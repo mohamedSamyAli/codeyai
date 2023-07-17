@@ -5,7 +5,7 @@ export const LandingPaage = () => {
   return (
     <div>
         <Button>
-            <Link to='/projects'>
+            <Link to='/codeyai/projects'>
         login
         </Link>
         </Button>

@@ -17,6 +17,8 @@ import { SideBar } from '../../components/classes/SideBar';
 import { useParams } from 'react-router-dom';
 import { addOrUpdateProject, getProject } from '../Projects/fakeApi';
 import axios from 'axios'
+import { saveAs } from 'file-saver';
+import { Button } from 'antd';
 const initBgColor = '#1A192B';
 
 const nodeTypes = {
@@ -161,61 +163,50 @@ const CustomNodeFlow = () => {
     //     components
     //   }
     // }))
-    let ProjectBody = {...project}
+    let ProjectBody = { ...project }
     delete ProjectBody.digram
     delete ProjectBody.Project_Type
     delete ProjectBody.id
-    axios.post("http://codeyai.com/test",{}).then(e => {
-      console.log(e)
-    })
 
     axios.post(process.env.REACT_APP_META_DATA,
       ProjectBody
-//       {
-//   "type": "maven-project",
-//   "language": "java",
-//   "BootVersion": "2.7.13",
-//   "groupId": "com.codeyai",
-//   "artifactId": "xxxx",
-//   "name": "zzzs",
-//   "description": "A new Spring Boot project",
-//   "packageName": "xxx.xx.xx",
-//   "packaging": "jar",
-//   "javaVersion": "20",
-//   "dependencies": [
-//     "dynatrace",
-//     "actuator",
-//     "data-redis-reactive",
-//     "camel",
-//     "cloud-contract-stub-runner",
-//     "validation",
-//     "azure-support",
-//     "cloud-starter-zookeeper-config",
-//     "cache",
-//     "spring-shell",
-//     "zipkin",
-//     "data-rest-explorer",
-//     "codecentric-spring-boot-admin-client",
-//     "azure-keyvault",
-//     "data-cassandra",
-//     "cloud-starter-consul-discovery",
-//     "kafka"
-//   ]
-// }
-      
-      ).then(e => {
+    ).then(e => {
 
-      axios.post(process.env.REACT_APP_JSON_LOADER,
-        {
-          [digramName]: {
-            components
-          }
+      // axios.post(process.env.REACT_APP_JSON_LOADER,
+      //   {
+      //     [digramName]: {
+      //       components
+      //     }
+      //   }
+      // ).then(response => {
+      //   console.log(response)
+      //   var blob = new Blob([response.data], {type: "octet/stream"});
+      //   var fileName = "QCPReport.zip";
+      //   saveAs(blob, fileName);
+      // }).catch((e) => {
+      //   console.log(e)
+      // })
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", process.env.REACT_APP_JSON_LOADER, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          // alert("Failed to download:" + xhr.status + "---" + xhr.statusText);
+          var blob = new Blob([xhr.response], { type: "octet/stream" });
+          var fileName = "QCPReport1.zip";
+          saveAs(blob, fileName);
         }
-      ).then(e => {
-        console.log(e)
-      }).catch((e) => {
-        console.log(e)
-      })
+      }
+      xhr.responseType = "arraybuffer";
+      xhr.send(JSON.stringify(
+        {
+              [digramName]: {
+                components
+              }
+            }
+      ));
     })
 
     console.log("store", {
@@ -343,8 +334,8 @@ const CustomNodeFlow = () => {
       <ReactFlowProvider>
         <div style={{ width: '20vw', height: '100vh', backgroundColor: "white", border: "2px solid grey" }}>
           <SideBar />
-          <button onClick={getData}>get data</button>
-          <input type="file" name="inputfile" id="inputfile" onChange={onReadFile} />
+          <Button onClick={getData} type='primary'>genrate project</Button>
+          {/* <input type="file" name="inputfile" id="inputfile" onChange={onReadFile} /> */}
 
         </div>
         <div className='w-[80vw] h-[100vh] relative ' style={{ width: '80vw', height: '100vh' }} ref={reactFlowWrapper}>

@@ -9,10 +9,10 @@ export const router = createBrowserRouter([
     element: <LandingPaage />
   },
   {
-    path: "/digrame/:projectId",
+    path: "/codeyai/digrame/:projectId",
     element: <CustomNodeFlow />,
   },{
-    path:"/projects",
+    path:"/codeyai/projects",
     element:<Projects/>
   }
 ])

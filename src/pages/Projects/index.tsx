@@ -26,7 +26,7 @@ export const Projects = () => {
                 {projects.map(ele => {
                     return <div key={ele.id} className='w-fit p-2  hover:cursor-pointer m-1 
                 border-solid border-black border-[1px] border-solid'>
-                        <Link to={'/digrame/'+ele.id}>
+                        <Link to={'/codeyai/digrame/'+ele.id}>
                             {ele.packageName}
                         </Link>
                     </div>

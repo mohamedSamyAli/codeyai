@@ -29,3 +29,35 @@
   "kafka"
 ]
 }
+
+{
+  "type": "maven-project",
+  "language": "java",
+  "BootVersion": "2.7.13",
+  "groupId": "com.codeyai",
+  "artifactId": "prjTest1",
+  "name": "PrjTest1",
+  "description": "A new Spring Boot project",
+  "packageName": "com.codeyai.prjTest",
+  "packaging": "jar",
+  "javaVersion": "20",
+  "dependencies": [
+    "dynatrace",
+    "actuator",
+    "data-redis-reactive",
+    "camel",
+    "cloud-contract-stub-runner",
+    "validation",
+    "azure-support",
+    "cloud-starter-zookeeper-config",
+    "cache",
+    "spring-shell",
+    "zipkin",
+    "data-rest-explorer",
+    "codecentric-spring-boot-admin-client",
+    "azure-keyvault",
+    "data-cassandra",
+    "cloud-starter-consul-discovery",
+    "kafka"
+  ]
+}

@@ -6,10 +6,12 @@ import { oprtions } from './ProjectsInitializeForms/projectTypeOptions';
 import { CoreJavaIntializer } from './ProjectsInitializeForms/CoreJavaIntializer';
 import { addOrUpdateProject, getAllProjects } from '../fakeApi';
 import uniqId from "uniqid"
+import { useNavigate } from 'react-router-dom';
 
 export const AddProject_Modal = ({ isOpen, setIsOpen }) => {
     const [data, setData] = useState({});
     const [step, setStep] = useState(1);
+    const navigate = useNavigate();
     const { Item } = Form
     const [form] = Form.useForm();
     const Project_Type = Form.useWatch('Project_Type', form);
@@ -32,17 +34,18 @@ export const AddProject_Modal = ({ isOpen, setIsOpen }) => {
         [step]
     );
 
-  
+
     const handleSubmit = useCallback((data: any) => {
         setData(data);
         let id = uniqId('project')
         data.id = id
         addOrUpdateProject(data, id)
         console.log("Data", data);
+        navigate("/codeyai/digrame/" + id)
     }, []);
 
     return (
-        <Modal open={isOpen} footer={null} closable={true} onCancel={()=>setIsOpen(false)}>
+        <Modal open={isOpen} footer={null} closable={true} onCancel={() => setIsOpen(false)}>
             <div className=''>
                 {/* <Steps
                     current={step}

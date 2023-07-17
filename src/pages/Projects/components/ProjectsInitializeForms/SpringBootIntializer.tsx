@@ -103,7 +103,7 @@ export const SpringBootIntializer = ({ data, onSuccess, onBack }: Props) => {
                     </Radio.Group>
                 </Item>
                 <Item
-                    label="type"
+                    label="dependencies"
                     name="dependencies"
                 >
                     <Select
