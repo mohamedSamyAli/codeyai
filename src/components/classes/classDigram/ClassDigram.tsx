@@ -94,7 +94,7 @@ console.log("props--->",props)
     if (customData) {
       document.getElementById(props.id + "title").innerText = customData.componentName
       store.current[props.id].componentName = customData.componentName
-
+      store.current[props.id].unDeletable = customData.unDeletable 
       if (customData?.classVariables) {
         setProperties(customData?.classVariables)
         console.log("customData?.classVariables",customData?.classVariables)

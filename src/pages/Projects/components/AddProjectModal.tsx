@@ -36,6 +36,9 @@ export const AddProject_Modal = ({ isOpen, setIsOpen }) => {
 
 
     const handleSubmit = useCallback((data: any) => {
+       if(data.Project_Type === 2 ){
+        data.digram = getSpringInitDigrame(data.name)
+       }
         setData(data);
         let id = uniqId('project')
         data.id = id
@@ -101,4 +104,12 @@ export const AddProject_Modal = ({ isOpen, setIsOpen }) => {
             </div>
         </Modal>
     )
+}
+
+
+const getSpringInitDigrame = (porject_name)=>{
+
+    return`{\"Name":{"components":[{"componentType":"class","unDeletable":"true","componentScope":"public","innerClasses":[],"classVariables":[],"functions":[{"id":"funclkbe2gap","funcName":"static main\\n","returnType":"void","funcScope":"public","description":"import org.springframework.boot.SpringApplication;\\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\\n\\n\\n@SpringBootApplication\\npublic class ${porject_name}Application {\\n\\n    public static void main(String[] args) {\\n        SpringApplication.run(${porject_name}Application.class, args);\\n\\n    }\\n\\n}","parameters":[{"paramName":"args","paramType":"String[]"}],"functionsCall":[]}],"componentName":"${porject_name}Application"}]},\"nodes\":[{\"customData\":{"componentType":"class","unDeletable":"true","componentScope":"public","innerClasses":[],"classVariables":[],"functions":[{"id":"funclkbe2gap","funcName":"static main\\n","returnType":"void","funcScope":"public","description":"import org.springframework.boot.SpringApplication;\\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\\n\\n\\n@SpringBootApplication\\npublic class ${porject_name}Application {\\n\\n    public static void main(String[] args) {\\n        SpringApplication.run(${porject_name}Application.class, args);\\n\\n    }\\n\\n}","parameters":[{"paramName":"args","paramType":"String[]"}],"functionsCall":[]}],"componentName":"${porject_name}Application"},\"height\":74,\"id\":\"dndnode_lkbol7wr\",\"position\":{\"x\":84.53120793874203,\"y\":-90.99858220030593},\"type\":\"ClassDigram\",\"width\":200}],\"edges\":[]}`
+
+    // return `{"Name":{"components":[{"componentType":"class","componentScope":"public","innerClasses":[],"classVariables":[],"functions":[{"id":"funclkbe2gap","funcName":"static main\\n","returnType":"void","funcScope":"public","description":"import org.springframework.boot.SpringApplication;\\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\\n\\n\\n@SpringBootApplication\\npublic class ${porject_name}Application {\\n\\n    public static void main(String[] args) {\\n        SpringApplication.run(${porject_name}Application.class, args);\\n\\n    }\\n\\n}","parameters":[{"paramName":"args","paramType":"String[]"}],"functionsCall":[]}],"componentName":"${porject_name}Application"}]}}`
 }

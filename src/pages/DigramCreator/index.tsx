@@ -280,8 +280,12 @@ const CustomNodeFlow = () => {
     let _nodes = []
     let _edges = []
     let isNodeParent = false
+    console.log(store.current[selectedItems.current.nodes[0]?.id])
+    if(selectedItems.current.nodes[0]?.id&&store.current[selectedItems.current.nodes[0]?.id].unDeletable){
+      toast.info("this class cannot be deleted")
+    }else{
     nodes.forEach(ele => {
-      if (ele.parentNode == selectedItems.current.nodes[0]?.id) {
+      if (selectedItems.current.nodes[0]?.id&&ele.parentNode === selectedItems.current.nodes[0]?.id) {
         isNodeParent = true
       }
     })
@@ -290,7 +294,6 @@ const CustomNodeFlow = () => {
     } else {
 
       nodes.forEach(ele => {
-        console.log("res=>", selectedItems.current.nodes.find(n => n.id === ele.id))
         if (!selectedItems.current.nodes.find(n => n.id === ele.id)) {
           _nodes.push(ele)
         }
@@ -306,7 +309,7 @@ const CustomNodeFlow = () => {
       delete store.current[selectedItems.current.nodes[0]?.id]
       console.log("store->", store,_edges,_nodes)
     }
-
+  }
   }
   const onSelectionChange = (e: OnSelectionChangeParams) => {
     selectedItems.current = e
