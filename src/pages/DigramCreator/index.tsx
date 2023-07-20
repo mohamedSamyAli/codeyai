@@ -168,21 +168,7 @@ const CustomNodeFlow = () => {
       ProjectBody
     ).then(e => {
 
-      axios.post(process.env.REACT_APP_JSON_LOADER,
-        {
-          [digramName]: {
-            components
-          }
-        }
-      ).then(response => {
-        console.log(response)
-        var blob = new Blob([response.data], {type: "octet/stream"});
-        var fileName = "QCPReport.zip";
-        saveAs(blob, fileName);
-      }).catch((e) => {
-        console.log(e)
-      })
-
+     
       var xhr = new XMLHttpRequest();
       xhr.open("POST", process.env.REACT_APP_JSON_LOADER, true);
       xhr.setRequestHeader("Content-type", "application/json");
