@@ -106,14 +106,11 @@ const CustomNodeFlow = () => {
     let digramName = document.getElementById("d_name").innerText
     let _store = JSON.parse(JSON.stringify(store.current))
     let nodes_data = nodes.map((e: any) => {
-      console.log("customDAta", _store[e.id])
       e.customData = _store[e.id]
       return e
     })
     edges.forEach(ele => {
-      console.log("-->", ele.targetHandle.split('_')[0])
       if (ele.targetHandle.split('_')[0] === "class") {
-        console.log("tt", _store[ele.target])
         if (!_store[ele.target].parentClass)
           _store[ele.target].parentClass = []
 
@@ -125,7 +122,6 @@ const CustomNodeFlow = () => {
       } else if (ele.targetHandle.split('_')[0] === "func") {
         debugger
         let currentfunction = _store[ele.target]?.functions?.filter(e => e.id == ele.targetHandle.split("_")[2])[0]
-        console.log(currentfunction, _store, ele)
         currentfunction?.functionsCall?.push({
           className: _store[ele.source].componentName,
           id: ele.sourceHandle.split("_")[1],
@@ -172,20 +168,20 @@ const CustomNodeFlow = () => {
       ProjectBody
     ).then(e => {
 
-      // axios.post(process.env.REACT_APP_JSON_LOADER,
-      //   {
-      //     [digramName]: {
-      //       components
-      //     }
-      //   }
-      // ).then(response => {
-      //   console.log(response)
-      //   var blob = new Blob([response.data], {type: "octet/stream"});
-      //   var fileName = "QCPReport.zip";
-      //   saveAs(blob, fileName);
-      // }).catch((e) => {
-      //   console.log(e)
-      // })
+      axios.post(process.env.REACT_APP_JSON_LOADER,
+        {
+          [digramName]: {
+            components
+          }
+        }
+      ).then(response => {
+        console.log(response)
+        var blob = new Blob([response.data], {type: "octet/stream"});
+        var fileName = "QCPReport.zip";
+        saveAs(blob, fileName);
+      }).catch((e) => {
+        console.log(e)
+      })
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", process.env.REACT_APP_JSON_LOADER, true);
@@ -315,14 +311,14 @@ const CustomNodeFlow = () => {
       })
 
       edges.forEach(ele => {
-        if (!selectedItems.current.edges.find(n => n.sourceNode.id === ele.id || n.targetNode.id === ele.id)) {
+        if (!selectedItems.current.nodes.find(n => n.id === ele.source || n.id === ele.target)) {
           _edges.push(ele)
         }
       })
       setNodes(_nodes)
       setEdges(_edges)
-      console.log("store->", store)
-      delete store.current["parentNode==selectedItems.current.nodes[0]?.id"]
+      delete store.current[selectedItems.current.nodes[0]?.id]
+      console.log("store->", store,_edges,_nodes)
     }
 
   }
@@ -347,7 +343,7 @@ const CustomNodeFlow = () => {
             edges={edges}
             onNodesChange={handelNodeChange}
             onSelectionChange={onSelectionChange}
-            onSelect={(e) => console.log("kkl", e)}
+            // onSelect={(e) => console.log("kkl", e)}
             // onNodeDrag={(ele) => { console.log("nodeDrag", ele) }}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}

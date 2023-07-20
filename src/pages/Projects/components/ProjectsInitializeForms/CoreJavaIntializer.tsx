@@ -99,7 +99,7 @@ export const CoreJavaIntializer = () => {
                 </Item>
                 <Item
                     label="dependencies"
-                    name="dependancies"
+                    name="dependencies"
                 >
                     <Select
                         placeholder="select project dependencies"
