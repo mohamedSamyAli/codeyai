@@ -183,7 +183,7 @@ export const __nodes = [
                     "id": "propliox4t4n",
                     "propName": "smsm2",
                     "propScope": "public",
-                    "propType": "string"
+                    "propType": "String"
                 }
             ]
         },

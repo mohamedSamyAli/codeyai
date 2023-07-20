@@ -27,8 +27,8 @@ export const TypeComponent = ({ data = [], id, onChange, _val = null }) => {
             label: (<div onClick={() => { changeTxt("double") }}>double</div>)
         },
         {
-            key: 'string',
-            label: (<div onClick={() => { changeTxt("string") }}>string</div>)
+            key: 'String',
+            label: (<div onClick={() => { changeTxt("String") }}>String</div>)
         },
         ...data.map(ele => ({
             key: ele,
