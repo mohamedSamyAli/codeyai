@@ -1,5 +1,3 @@
-import React from "react";
-
 function PotentailBox({ title, desc }) {
   return (
     <div className="flex-col">

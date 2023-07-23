@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'Russo': ['Russo One', 'sans-serif'],
-        'Sofia': ['Sofia', 'sans-serif'],
+        Russo: ["Russo One", "sans-serif"],
+        Sofia: ["Sofia", "sans-serif"],
       },
       screens: {
         sm: "576px",
@@ -14,6 +14,11 @@ module.exports = {
         xl: "1200px",
         "2xl": "1400px",
       },
+    },
+  },
+  variants: {
+    extend: {
+      display: ["group-focus"],
     },
   },
   plugins: [],
