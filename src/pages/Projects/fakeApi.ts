@@ -25,7 +25,6 @@ export const getAllProjects = ()=>{
     data.forEach(ele => {
         arr.push(JSON.parse(localStorage.getItem(ele)))
     });
-    console.log(arr)
     return arr
 }
  export const getProject = (id)=>{

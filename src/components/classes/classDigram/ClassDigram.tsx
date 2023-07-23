@@ -27,7 +27,6 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
       document.getElementById(id)?.focus()
     }, 10)
   }
-console.log("props--->",props)
   useEffect(() => {
     // if (!store.current[props.id]) {
     //   store.current[props.id] = {}
@@ -42,13 +41,11 @@ console.log("props--->",props)
 
   const changefunction = (id, val) => {
     let func = functions.filter(ele => ele.id === id)[0]
-    console.log({ ...func })
     func.funcName = val.funcName
     func.parameters = val.parameters
     func.description = val.description
     func.funcScope = val.funcScope
     func.returnType = val.returnType
-    console.log(func)
     setFunctions([...functions])
     store.current[props.id].functions = functions
   }
@@ -59,14 +56,12 @@ console.log("props--->",props)
     setTimeout(() => {
       document.getElementById(id)?.focus()
     }, 10)
-    console.log("first")
     store.current[props.id].classVariables = newProps
   }
 
   const onDelProps = () => {
     let newProps = properties.filter(e => !selectedProps.includes(e.id))
     setProperties(newProps)
-    console.log("first")
     store.current[props.id].classVariables = newProps
 
   }
@@ -97,7 +92,6 @@ console.log("props--->",props)
       store.current[props.id].unDeletable = customData.unDeletable 
       if (customData?.classVariables) {
         setProperties(customData?.classVariables)
-        console.log("customData?.classVariables",customData?.classVariables)
         store.current[props.id].classVariables = customData?.classVariables
       }
       if (customData?.functions) {
@@ -109,7 +103,6 @@ console.log("props--->",props)
         store.current[props.id].functions = [...tempFunctions]
       }
     }
-    console.log("claaaass",store.current[props.id])
   }, [])
 
   const changeProperties = (id, val) => {
@@ -117,7 +110,7 @@ console.log("props--->",props)
     prop.propName = val.propName
     prop.propScope = val.propScope
     prop.propType = val.propType
-    console.log(properties)
+    (properties)
     setProperties([...properties])
     store.current[props.id].classVariables = properties
 

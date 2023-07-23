@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, ReactFlowProvider, Background, updateEdge, MarkerType, ConnectionLineType, Connection, OnSelectionChangeParams } from 'reactflow';
 import 'reactflow/dist/style.css';
 import ClassDigram from '../../components/classes/classDigram/ClassDigram';
+import ServiceDigram from '../../components/classes/serviceDigram/ServiceDigram';
+import ControllerDigram from '../../components/classes/controllerDigram/ControllerDigram';
 import InnerClassDigram from '../../components/classes/innerClassDigram/InnerClassDigram';
 import InterfaceDigram from '../../components/classes/interfaceDigram/InterfaceDigram';
 import '../../index.css';
@@ -23,6 +25,8 @@ const initBgColor = '#1A192B';
 
 const nodeTypes = {
   ClassDigram: ClassDigram,
+  ServiceDigram: ServiceDigram,
+  ControllerDigram: ControllerDigram,
   InnerClassDigram: InnerClassDigram,
   InterfaceDigram: InterfaceDigram,
 };
@@ -106,6 +110,7 @@ const CustomNodeFlow = () => {
     let digramName = document.getElementById("d_name").innerText
     let _store = JSON.parse(JSON.stringify(store.current))
     let nodes_data = nodes.map((e: any) => {
+      console.log("ee===->",e)
       e.customData = _store[e.id]
       return e
     })
@@ -137,6 +142,7 @@ const CustomNodeFlow = () => {
     let components = []
     Object.getOwnPropertyNames(_store).forEach(n => {
       if (_store[n].componentType !== DigramTypes.inerClass) {
+        console.log("n-->",_store[n])
         components.push(_store[n])
       }
     })
@@ -168,7 +174,7 @@ const CustomNodeFlow = () => {
       ProjectBody
     ).then(e => {
 
-     
+
       var xhr = new XMLHttpRequest();
       xhr.open("POST", process.env.REACT_APP_JSON_LOADER, true);
       xhr.setRequestHeader("Content-type", "application/json");
@@ -184,10 +190,10 @@ const CustomNodeFlow = () => {
       xhr.responseType = "arraybuffer";
       xhr.send(JSON.stringify(
         {
-              [digramName]: {
-                components
-              }
-            }
+          [digramName]: {
+            components
+          }
+        }
       ));
     })
 
@@ -268,7 +274,6 @@ const CustomNodeFlow = () => {
       }
     })
     getDataFromlocalStorge()
-    console.log("added")
     document.addEventListener('keydown', (e: any) => {
       if (e.code === "Delete") {
         onDeleteRef.current()
@@ -281,35 +286,35 @@ const CustomNodeFlow = () => {
     let _edges = []
     let isNodeParent = false
     console.log(store.current[selectedItems.current.nodes[0]?.id])
-    if(selectedItems.current.nodes[0]?.id&&store.current[selectedItems.current.nodes[0]?.id].unDeletable){
+    if (selectedItems.current.nodes[0]?.id && store.current[selectedItems.current.nodes[0]?.id].unDeletable) {
       toast.info("this class cannot be deleted")
-    }else{
-    nodes.forEach(ele => {
-      if (selectedItems.current.nodes[0]?.id&&ele.parentNode === selectedItems.current.nodes[0]?.id) {
-        isNodeParent = true
-      }
-    })
-    if (isNodeParent) {
-      toast.error("can't delete node that contain inner class please delete inner class first")
     } else {
-
       nodes.forEach(ele => {
-        if (!selectedItems.current.nodes.find(n => n.id === ele.id)) {
-          _nodes.push(ele)
+        if (selectedItems.current.nodes[0]?.id && ele.parentNode === selectedItems.current.nodes[0]?.id) {
+          isNodeParent = true
         }
       })
+      if (isNodeParent) {
+        toast.error("can't delete node that contain inner class please delete inner class first")
+      } else {
 
-      edges.forEach(ele => {
-        if (!selectedItems.current.nodes.find(n => n.id === ele.source || n.id === ele.target)) {
-          _edges.push(ele)
-        }
-      })
-      setNodes(_nodes)
-      setEdges(_edges)
-      delete store.current[selectedItems.current.nodes[0]?.id]
-      console.log("store->", store,_edges,_nodes)
+        nodes.forEach(ele => {
+          if (!selectedItems.current.nodes.find(n => n.id === ele.id)) {
+            _nodes.push(ele)
+          }
+        })
+
+        edges.forEach(ele => {
+          if (!selectedItems.current.nodes.find(n => n.id === ele.source || n.id === ele.target)) {
+            _edges.push(ele)
+          }
+        })
+        setNodes(_nodes)
+        setEdges(_edges)
+        delete store.current[selectedItems.current.nodes[0]?.id]
+        console.log("store->", store, _edges, _nodes)
+      }
     }
-  }
   }
   const onSelectionChange = (e: OnSelectionChangeParams) => {
     selectedItems.current = e

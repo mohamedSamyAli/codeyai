@@ -27,7 +27,6 @@ export const PropertyComponent = ({ onChange, setSelectedProps = null, id, data 
             setSelectedProps(e => {
 
                 let a = e.concat(id)
-                console.log(e, a)
                 return a
             }
             )
@@ -36,7 +35,6 @@ export const PropertyComponent = ({ onChange, setSelectedProps = null, id, data 
             setTimeout(() => {
 
                 setSelectedProps(e => e.filter(ele => ele != id))
-                console.log('rmv')
             }, 500);
         }
     }, [isFocus])
