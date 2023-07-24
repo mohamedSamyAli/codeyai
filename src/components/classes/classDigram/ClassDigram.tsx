@@ -11,6 +11,9 @@ import { ResizeIcon } from '../CustomResizer';
 import { FunctionHandels } from './FunctionHandels';
 import { ClassHandels } from './ClassHandels';
 import classNames from 'classnames';
+import { AnnotaionComponent } from '../AnnotaionComponent';
+import { ImplementsComponent } from '../InterfacesComponent';
+import { ExtendComponent } from '../ExtendComponent';
 
 const getId = () => `innernode_${uniqId()}`;
 
@@ -22,18 +25,13 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
   const [selectedFunc, setSelectedFunc] = useState([])
   const onAddFunction = () => {
     let id = uniqId("func")
-    setFunctions(functions.concat({ id, funcName: "funcName", returnType: "int", funcScope: "public", description: "", parameters: [], functionsCall: [] }))
+    setFunctions(functions.concat({ id, funcName: "funcName", returnType: "int", annotations: [], funcScope: "public", description: "", parameters: [], functionsCall: [] }))
     setTimeout(() => {
       document.getElementById(id)?.focus()
     }, 10)
   }
   useEffect(() => {
-    // if (!store.current[props.id]) {
-    //   store.current[props.id] = {}
-    //   store.current[props.id].componentType = DigramTypes.class
-    //   store.current[props.id].componentScope = "public"
-    //   store.current[props.id].innerClasses = []
-    // }
+
     initComponentInTheStore()
     store.current[props.id].componentName = title
 
@@ -44,6 +42,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     func.funcName = val.funcName
     func.parameters = val.parameters
     func.description = val.description
+    func.annotations = val.annotations
     func.funcScope = val.funcScope
     func.returnType = val.returnType
     setFunctions([...functions])
@@ -71,12 +70,15 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     store.current[props.id].functions = temp
 
   }
-  const initComponentInTheStore  = ()=>{
+  const initComponentInTheStore = () => {
     if (!store.current[props.id]) {
       store.current[props.id] = {}
       store.current[props.id].componentType = DigramTypes.class
       store.current[props.id].componentScope = "public"
       store.current[props.id].innerClasses = []
+      store.current[props.id].annotations = []
+      store.current[props.id].implements = []
+      store.current[props.id].extends = []
       store.current[props.id].classVariables = []
       store.current[props.id].functions = []
     }
@@ -88,11 +90,14 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     initComponentInTheStore()
     if (customData) {
       document.getElementById(props.id + "title").innerText = customData.componentName
-      store.current[props.id].componentName = customData.componentName
-      store.current[props.id].unDeletable = customData.unDeletable 
+      store.current[props.id] = customData
+      // store.current[props.id].componentName = customData.componentName
+      // store.current[props.id].unDeletable = customData.unDeletable
+
+
       if (customData?.classVariables) {
         setProperties(customData?.classVariables)
-        store.current[props.id].classVariables = customData?.classVariables
+        // store.current[props.id].classVariables = customData?.classVariables
       }
       if (customData?.functions) {
         let tempFunctions = customData?.functions.map(({ id, funcName, returnType, funcScope, description, parameters }) => {
@@ -100,7 +105,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
         }
         )
         setFunctions(tempFunctions)
-        store.current[props.id].functions = [...tempFunctions]
+        // store.current[props.id].functions = [...tempFunctions]
       }
     }
   }, [])
@@ -110,7 +115,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     prop.propName = val.propName
     prop.propScope = val.propScope
     prop.propType = val.propType
-    (properties)
+      (properties)
     setProperties([...properties])
     store.current[props.id].classVariables = properties
 
@@ -144,12 +149,25 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     },
     [reactFlowInstance]
   );
-
+  const onAnnotaionChange = (e) => {
+    console.log("e", e)
+    store.current[props.id].annotations = e
+  }
+  const onImplementsChange = (e) => {
+    store.current[props.id].implements = e
+  }
+  const onExtendsChange = (e) => {
+    console.log(e)
+    store.current[props.id].extends = e
+  }
   return (
     <>
       <div onDrop={onDrop}>
-        <div className={classNames('classdigram-container border-red',{shaded:props.selected})}>
+        <div className={classNames('classdigram-container border-red', { shaded: props.selected })}>
           <ClassHandels isConnectable={isConnectable} />
+          <AnnotaionComponent value={customData?.annotations} onChange={onAnnotaionChange} />
+          <ImplementsComponent value={customData?.implements} onChange={onImplementsChange} />
+          <ExtendComponent value={customData?.extends} onChange={onExtendsChange} />
           <div className='title flex relative p-[2px]'>
 
             <div

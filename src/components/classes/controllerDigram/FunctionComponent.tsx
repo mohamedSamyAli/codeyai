@@ -9,7 +9,7 @@ import { AnnotaionComponent } from './AnnotaionComponent';
 
 const { TextArea } = Input;
 export const FunctionComponent = ({ data = null, setSelectedFunc = null, onChange, id }) => {
-    const [value, setvalue] = useState({ funcName: 'funcName', parameters: [], description: '', annotaion: [], funcScope: "public", returnType: "int" })
+    const [value, setvalue] = useState({ funcName: 'funcName', parameters: [], description: '', annotations: [], funcScope: "public", returnType: "int" })
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [annotation, setAnnotation] = useState('');
     const [isAnotationModalOpen, setIsAnotationModalOpen] = useState(false);
@@ -26,7 +26,7 @@ export const FunctionComponent = ({ data = null, setSelectedFunc = null, onChang
             document.getElementById(id + 'funcName').innerText = data.funcName
             try {
 
-                setAnnotation(data.annotaion?.join("\n") ?? [])
+                setAnnotation(data.annotations?.join("\n") ?? [])
             } catch (error) {
 
             }
@@ -71,7 +71,7 @@ export const FunctionComponent = ({ data = null, setSelectedFunc = null, onChang
     const onAnnotaionChange = (_annotations) => {
         let annotations = _annotations.split("/n")
 
-        changeProperties("annotaion", annotations)
+        changeProperties("annotations", annotations)
         setAnnotation(_annotations)
     }
     return (
@@ -80,7 +80,7 @@ export const FunctionComponent = ({ data = null, setSelectedFunc = null, onChang
                 {/* <div onClick={() => setIsAnotationModalOpen(true)} className='p-[1px] rounded-sm text-[10px] bg-slate-200 cursor-pointer w-fit'>
                     @
                 </div> */}
-                <AnnotaionComponent value={data.annotaion} onChange={(e)=>{changeProperties("annotaion", e)}} />
+                <AnnotaionComponent value={data.annotations} onChange={(e)=>{changeProperties("annotations", e)}} />
                 <div onFocus={(e) => { setIsFocus(true) }} onBlur={(e) => setIsFocus(false)}
                     className='functiondata w-max items-center flex min-w-[1rem] nodrag cursor-text p-[1px] focus-visible:outline-none'>
                     <ScopeComponent onChange={(val) => changeProperties("funcScope", val)} _val={data?.funcScope} />

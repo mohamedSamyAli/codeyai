@@ -5,11 +5,14 @@ import { Input, Button } from 'antd';
 import { TypeComponent } from './TypeComponent';
 import { ScopeComponent } from './ScopeComponent';
 import classNames from 'classnames';
+import { AnnotaionComponent } from './AnnotaionComponent';
 
 const { TextArea } = Input;
-export const FunctionComponent = ({ data = null, setSelectedFunc=null,onChange, id }) => {
-    const [value, setvalue] = useState({ funcName: 'funcName', parameters: [], description: '', funcScope: "public", returnType: "int" })
+export const FunctionComponent = ({ data = null, setSelectedFunc = null, onChange, id }) => {
+    const [value, setvalue] = useState({ funcName: 'funcName', parameters: [], description: '', annotations: [], funcScope: "public", returnType: "int" })
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [annotation, setAnnotation] = useState('');
+    const [isAnotationModalOpen, setIsAnotationModalOpen] = useState(false);
     const [isFocus, setIsFocus] = useState(false)
     const changeProperties = (id, name) => {
         setvalue(val => ({ ...val, [id]: name }))
@@ -21,23 +24,26 @@ export const FunctionComponent = ({ data = null, setSelectedFunc=null,onChange, 
         if (data) {
             setvalue(data)
             document.getElementById(id + 'funcName').innerText = data.funcName
-            let paramText = ''
-            data?.parameters?.forEach((ele,i)=>{
-                paramText+=ele.paramName
-                paramText+=":"+ele.paramType
-                if(i<data.parameters.length-1){
-                    paramText+=","
-                }
+            try {
 
+                setAnnotation(data.annotations?.join("\n") ?? [])
+            } catch (error) {
+
+            }
+            let paramText = ''
+            data?.parameters?.forEach((ele, i) => {
+                paramText += ele.paramName
+                paramText += ":" + ele.paramType
+                if (i < data.parameters.length - 1) {
+                    paramText += ","
+                }
             })
             document.getElementById(id + 'param').innerText = paramText
         }
     }, [])
     useEffect(() => {
         if (isFocus && setSelectedFunc) {
-
             setSelectedFunc(e => {
-
                 let a = e.concat(id)
                 return a
             }
@@ -62,10 +68,19 @@ export const FunctionComponent = ({ data = null, setSelectedFunc=null,onChange, 
         })
         changeProperties("parameters", paramsArray)
     }
+    const onAnnotaionChange = (_annotations) => {
+        let annotations = _annotations.split("/n")
+
+        changeProperties("annotations", annotations)
+        setAnnotation(_annotations)
+    }
     return (
         <>
             <div className={classNames('w-[100%]', { 'overflow-clip': !isFocus })}>
-
+                {/* <div onClick={() => setIsAnotationModalOpen(true)} className='p-[1px] rounded-sm text-[10px] bg-slate-200 cursor-pointer w-fit'>
+                    @
+                </div> */}
+                <AnnotaionComponent value={data.annotations} onChange={(e)=>{changeProperties("annotations", e)}} />
                 <div onFocus={(e) => { setIsFocus(true) }} onBlur={(e) => setIsFocus(false)}
                     className='functiondata w-max items-center flex min-w-[1rem] nodrag cursor-text p-[1px] focus-visible:outline-none'>
                     <ScopeComponent onChange={(val) => changeProperties("funcScope", val)} _val={data?.funcScope} />
@@ -106,6 +121,12 @@ export const FunctionComponent = ({ data = null, setSelectedFunc=null,onChange, 
                 footer={[<Button onClick={() => setIsModalOpen(false)}>Ok</Button>]}
                 title={value.funcName} open={isModalOpen}>
                 <TextArea onChange={(e) => { setvalue(val => { return { ...val, description: e.target.value } }) }} value={value.description} rows={10} placeholder="Function Description" />
+            </Modal>
+            <Modal
+                closable={false}
+                footer={[<Button onClick={() => setIsAnotationModalOpen(false)}>Ok</Button>]}
+                title={"Anotations"} open={isAnotationModalOpen}>
+                <TextArea onChange={(e) => { onAnnotaionChange(e.target.value) }} value={annotation} rows={10} placeholder="Anotations" />
             </Modal>
         </>
     )

@@ -23,7 +23,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
   const [selectedFunc, setSelectedFunc] = useState([])
   const onAddFunction = () => {
     let id = uniqId("func")
-    setFunctions(functions.concat({ id, funcName: "funcName", returnType: "int", annotaion: [], funcScope: "public", description: "", parameters: [], functionsCall: [] }))
+    setFunctions(functions.concat({ id, funcName: "funcName", returnType: "int", annotations: [], funcScope: "public", description: "", parameters: [], functionsCall: [] }))
     setTimeout(() => {
       document.getElementById(id)?.focus()
     }, 10)
@@ -38,7 +38,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     func.funcName = val.funcName
     func.parameters = val.parameters
     func.description = val.description
-    func.annotaion = val.annotaion
+    func.annotations = val.annotations
     func.funcScope = val.funcScope
     func.returnType = val.returnType
     setFunctions([...functions])
