@@ -15,6 +15,9 @@
   .btn {
     @apply bg-gradient-to-b bg-[#3F67AD] hover:from-blue-500 hover:to-[#FF8F94] transition-all duration-200 text-white rounded-[12px] px-[15px] py-[25px]  sm:px-[28px] sm:py-[15px] font-medium text-[14px] sm:text-lg leading-[26px] not-italic;
   }
+  .bfr {
+    @apply before:relative before:top-[2px] before:-left-[15px];
+  }
 }
 /* [#3F67AD]  */
 body {

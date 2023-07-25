@@ -20,8 +20,7 @@ import blocks from "../assets/personalPage/blocks.svg";
 
 import help from "../assets/personalPage/helpIcon.svg";
 
-import marked from "../assets/personalPage/marked.svg";
-
+// import marked from "../assets/personalPage/marked.svg";
 
 import PersonalContent from "./PersonalContent";
 
@@ -121,22 +120,24 @@ const Personal = () => {
                 <span className="flex">
                   <img src={vector} alt="vector-img" />
                 </span>
-                <div className="absolute border-b  group-focus:block top-full min-w-full w-32 bg-white drop-shadow-[0px_2px_19px_#3f67ad1f] mt-1 rounded">
+                <div className="absolute hidden border-b  group-focus:block top-full min-w-full w-40 bg-white drop-shadow-[0px_2px_19px_#3f67ad1f] mt-3 rounded before:content-[''] before:border-[15px] before:border-[transparent_transparent_white_transparent] before:absolute before:left-[15px] before:top-[-25px]">
                   <ul className="py-3 flex flex-col gap-[10px] text-center text-[11px] border-b border-[#E3E4EA] rounded-t">
+                    <h6 className="text-gray-300">Sort by</h6>
                     <li className="hover:bg-[#EBF1FF] py-[5px]">
                       Alphabetical
                     </li>
                     <li className="hover:bg-[#EBF1FF] py-[5px]">
                       Date created
                     </li>
-                    <li className={`before:content-['*'] before:relative before:top-[2px] before:-left-[15px] hover:bg-[#EBF1FF] py-[5px]`}>
+                    <li
+                      className={`before:content-marked bfr hover:bg-[#EBF1FF] py-[5px]`}
+                    >
                       Last viewed
                     </li>
                   </ul>
                   <ul className="py-3 flex flex-col gap-[10px] text-center text-[11px] rounded-b">
-                    <li className="hover:bg-[#EBF1FF] py-[5px]">
-                      Older first
-                    </li>
+                    <h6 className="text-gray-300">Order</h6>
+                    <li className="hover:bg-[#EBF1FF] py-[5px]">Older first</li>
                     <li className="hover:bg-[#EBF1FF] py-[5px]">
                       Newest first
                     </li>
