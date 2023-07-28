@@ -14,10 +14,8 @@ export const AnnotaionComponent = ({value, onChange}) => {
     useEffect(() => {
         if (value&&!annotation) {
             try {
-
                 setAnnotation(value?.join("\n") ?? [])
             } catch (error) {
-
             }
         }
     }, [value])

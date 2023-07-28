@@ -2,17 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sofia&display=swap");
+
+@layer components {
+  .container {
+    @apply w-[90%] px-[30px] mx-auto;
+  }
+
+  .element-center {
+    @apply flex justify-center items-center;
+  }
+
+  .btn {
+    @apply bg-gradient-to-b bg-[#3F67AD] hover:from-blue-500 transition-all duration-200 text-white rounded-[12px] px-[15px] py-[25px] sm:px-[28px] sm:py-[15px] font-medium text-[14px] sm:text-lg leading-[26px] not-italic;
+  }
+
+  .bfr {
+    @apply before:relative before:top-[2px] before:-left-[15px];
+  }
+}
+
+/* [#3F67AD]  */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -23,6 +45,7 @@ code {
   border-radius: 5px;
   text-align: center;
 }
+
 .ant-btn-primary {
   color: #fff;
   background-color: #1677ff !important;
