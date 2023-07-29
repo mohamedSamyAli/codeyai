@@ -13,6 +13,7 @@ export const Projects = () => {
   }, [isAddModalopen]);
   const updateProjects = () => {
     setProJects(getAllProjects());
+    console.log("---->",getAllProjects())
   };
 
   let old = (

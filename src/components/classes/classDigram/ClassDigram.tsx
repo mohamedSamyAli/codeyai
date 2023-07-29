@@ -115,7 +115,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     prop.propName = val.propName
     prop.propScope = val.propScope
     prop.propType = val.propType
-      (properties)
+      // (properties)
     setProperties([...properties])
     store.current[props.id].classVariables = properties
 

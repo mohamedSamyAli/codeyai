@@ -37,7 +37,6 @@ const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 
 const CustomNodeFlow = () => {
   const { projectId } = useParams();
-
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [bgColor, setBgColor] = useState(initBgColor);
