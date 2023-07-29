@@ -6,14 +6,17 @@ import { getAllProjects } from "../fakeApi";
 import projectBlock from "../../../assets/ProjectBlock.svg";
 
 import PersonalProjects from "./PersonalProjects";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const RecentProjects = (props:any) => {
-  //  const [projects, setProJects] = useState([]);
-
-  // const updateProjects = () => {
-  //   setProJects(getAllProjects());
-  // };
-  // console.log(projects);
+const RecentProjects = (props: any) => {
+  const [projects, setProJects] = useState([]);
+  useEffect(() => {
+    updateProjects();
+  }, []);
+  const updateProjects = () => {
+    setProJects(getAllProjects());
+  };
 
   // let old = (
   //   <div>
@@ -31,67 +34,69 @@ const RecentProjects = (props:any) => {
   //     </div>
   //   </div>
   // );
-  
-  const projects = [
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-    {
-      image: projectBlock,
-      title: "Block Diagram",
-      description: "9 hour ago",
-    },
-  ];
+
+  // const projects = [
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  //   {
+  //     image: projectBlock,
+  //     title: "Block Diagram",
+  //     description: "9 hour ago",
+  //   },
+  // ];
 
   return props.status ? (
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-full px-8">
-        {projects.map((project) => {
-          return (
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-full px-8">
+      {projects.map((project) => {
+        return (
+          <Link to={"/codeyai/digrame/" + project.id}>
             <PersonalProjects
-              image={project.image}
-              title={project.title}
+              image={projectBlock}
+              title={project.name}
               desc={project.description}
             />
-          );
-        })}
-      </div>
+          </Link>
+        );
+      })}
+    </div>
   ) : (
     <div className="element-center flex-col gap-8 h-full py-9 sm:py-0">
       <div>

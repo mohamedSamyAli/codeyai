@@ -19,7 +19,7 @@ function Landing() {
           <h1 className="pb-[24px] px-[25px] font-medium text-[24px] md:text-[28px] text-center text-[#22222A]">
             Your{" "}
             <span className="text-4xl from-[#3F67AD] via-[#7084B3] to-[#FF8F94] bg-gradient-to-b bg-clip-text text-transparent">
-              UML Class diagrams
+            CodeAi diagrams
             </span>{" "}
             are{" "}
             <span className="text-4xl from-[#3F67AD] via-[#7084B3] to-[#FF8F94] bg-gradient-to-b bg-clip-text text-transparent">

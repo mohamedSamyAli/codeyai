@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Handle, Position } from 'reactflow'
 import redArrow from '../../../assets/redArrow.svg'
 import greenArrow from '../../../assets/greenArrow.svg'
+
+
+
 export const FunctionHandels = ({ id, isConnectable }) => {
     return (
         <>
