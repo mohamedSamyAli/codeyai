@@ -197,13 +197,9 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
           {/* *************************************************** */}
           
           
-          <Dropdown menu={{ items }} placement="bottom" arrow>
-          <div className='p-[1px] flex items-center cursor-pointer bg-slate-300 rounded-sm w-fit h-[13px] mt-[3px]'>
-            <img src={threeDots} alt="threeDots" />
-          </div>
-          </Dropdown>
-          <div className='title flex relative p-[2px]'>
-
+         
+          <div className='title flex relative p-[2px] items-center'>
+          
             <div
               id={props.id + "title"}
               suppressContentEditableWarning={true}
@@ -211,8 +207,15 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
               contentEditable={true}
               className='min-w-[1rem] focus-visible:outline-none nodrag cursor-text w-fit'
               onInput={(e) => { setTitle((e.target as HTMLElement).innerText) }}>
+                
               ClassName
+              
             </div>
+            <Dropdown menu={{ items }} placement="bottom" arrow>
+          <div className='p-[1px] ml-1 flex items-center cursor-pointer bg-slate-300 rounded-sm w-fit h-[13px] mt-[3px]'>
+            <img src={threeDots} alt="threeDots" />
+          </div>
+          </Dropdown>
             <Handle
               position={Position.Right}
               style={{ top: "35%", background: 'red' }}
