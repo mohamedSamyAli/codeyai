@@ -78,7 +78,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
       store.current[props.id].innerClasses = []
       store.current[props.id].annotations = []
       store.current[props.id].implements = []
-      store.current[props.id].extends = []
+      store.current[props.id].extends = ''
       store.current[props.id].classVariables = []
       store.current[props.id].functions = []
     }
