@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import Home from "../pages/components/Home";
 import RootLayout from "../pages/components/RootLayout";
-import CustomNodeFlow from "../pages/DigramCreator"
+import CustomNodeFlow from "../pages/DigramCreator";
 import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
 import { LandingPaage } from "../pages/LandingPage";
 import Login from "../pages/Login/Login";
