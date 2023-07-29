@@ -2,7 +2,7 @@ import { Button, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react'
 const { TextArea } = Input;
 
-export const ExtendComponent = ({value, onChange}) => {
+export const ExtendComponent = ({value, onChange,className=""}) => {
     const [Extends, setExtends] = useState('');
     const [isExtendsModalOpen, setIsExtendsOpen] = useState(false);
 
@@ -21,7 +21,7 @@ export const ExtendComponent = ({value, onChange}) => {
     }, [value])
     return (
         <>
-            <div onClick={() => setIsExtendsOpen(true)} className='p-[1px] rounded-sm text-[10px] bg-slate-200 cursor-pointer w-fit'>
+            <div onClick={() => setIsExtendsOpen(true)} className={`p-[1px] rounded-sm ${className === "innerThreeDots"? "text-[1.2rem]":"text-[10px]"} bg-slate-200 cursor-pointer w-fit`}>
                 Ex
             </div>
             <Modal

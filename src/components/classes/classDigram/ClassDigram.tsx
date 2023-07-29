@@ -4,6 +4,7 @@ import '../../../App.css'
 import uniqId from "uniqid"
 import { FunctionComponent } from '../FunctionComponent';
 import AddImage from '../../../assets/addimg.svg'
+import threeDots from '../../../assets/three-dots.svg'
 import { DigramTypes } from '../types';
 import { PropertyComponent } from '../PropertyComponent';
 import Del from '../../../assets/del.png'
@@ -14,6 +15,7 @@ import classNames from 'classnames';
 import { AnnotaionComponent } from '../AnnotaionComponent';
 import { ImplementsComponent } from '../InterfacesComponent';
 import { ExtendComponent } from '../ExtendComponent';
+import { Button, Dropdown, MenuProps } from 'antd';
 
 const getId = () => `innernode_${uniqId()}`;
 
@@ -23,6 +25,7 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
   const [title, setTitle] = useState("className")
   const [selectedProps, setSelectedProps] = useState([])
   const [selectedFunc, setSelectedFunc] = useState([])
+  
   const onAddFunction = () => {
     let id = uniqId("func")
     setFunctions(functions.concat({ id, funcName: "funcName", returnType: "int", annotations: [], funcScope: "public", description: "", parameters: [], functionsCall: [] }))
@@ -160,14 +163,45 @@ export default memo<any>(({ data: { store, setNodes, setEdges, reactFlowWrapper,
     console.log(e)
     store.current[props.id].extends = e
   }
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <div className="w-fit">
+          <AnnotaionComponent className="innerThreeDots" value={customData?.annotations} onChange={onAnnotaionChange} />
+        </div>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <div className="w-fit">
+          <ImplementsComponent className="innerThreeDots" value={customData?.implements} onChange={onImplementsChange} />
+        </div>
+      ),
+    },
+    {
+      key: '3',
+      label: (
+        <div className="w-fit">
+        <ExtendComponent className="innerThreeDots" value={customData?.extends} onChange={onExtendsChange} />
+        </div>
+      ),
+    },
+  ];
   return (
     <>
       <div onDrop={onDrop}>
         <div className={classNames('classdigram-container border-red', { shaded: props.selected })}>
           <ClassHandels isConnectable={isConnectable} />
-          <AnnotaionComponent value={customData?.annotations} onChange={onAnnotaionChange} />
-          <ImplementsComponent value={customData?.implements} onChange={onImplementsChange} />
-          <ExtendComponent value={customData?.extends} onChange={onExtendsChange} />
+          {/* *************************************************** */}
+          
+          
+          <Dropdown menu={{ items }} placement="bottom" arrow>
+          <div className='p-[1px] flex items-center cursor-pointer bg-slate-300 rounded-sm w-fit h-[13px] mt-[3px]'>
+            <img src={threeDots} alt="threeDots" />
+          </div>
+          </Dropdown>
           <div className='title flex relative p-[2px]'>
 
             <div

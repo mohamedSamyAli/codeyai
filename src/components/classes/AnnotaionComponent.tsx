@@ -2,7 +2,7 @@ import { Button, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react'
 const { TextArea } = Input;
 
-export const AnnotaionComponent = ({value, onChange}) => {
+export const AnnotaionComponent = ({value, onChange, className=""}) => {
     const [annotation, setAnnotation] = useState('');
     const [isAnotationModalOpen, setIsAnotationModalOpen] = useState(false);
 
@@ -21,7 +21,7 @@ export const AnnotaionComponent = ({value, onChange}) => {
     }, [value])
     return (
         <>
-            <div onClick={() => setIsAnotationModalOpen(true)} className='p-[1px] rounded-sm text-[10px] bg-slate-200 cursor-pointer w-fit'>
+            <div onClick={() => setIsAnotationModalOpen(true)} className={`p-[1px] rounded-sm ${className === "innerThreeDots"? "text-[1.2rem]":"text-[10px]"} bg-slate-200 cursor-pointer w-fit`}>
                 @
             </div>
             <Modal
