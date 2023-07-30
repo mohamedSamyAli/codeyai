@@ -31,6 +31,7 @@ export const FunctionComponent = ({ data = null, setSelectedFunc = null, onChang
 
             }
             let paramText = ''
+            console.log("data-->p-->",data)
             data?.parameters?.forEach((ele, i) => {
                 paramText += ele.paramName
                 paramText += ":" + ele.paramType

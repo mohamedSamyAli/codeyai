@@ -19,7 +19,7 @@ export default memo<any>(({ data: { store, customData }, isConnectable, ...props
 
     const onAddFunction = () => {
         let id = uniqId("func")
-        setFunctions(functions.concat({ id, funcName: "propName", returnType: "void", funcScope: "public", description: [], parameters: "", functionsCall: [] }))
+        setFunctions(functions.concat({ id, funcName: "propName", returnType: "void", funcScope: "public", description: [], parameters: [], functionsCall: [] }))
         setTimeout(() => {
             document.getElementById(id)?.focus()
         }, 10)
